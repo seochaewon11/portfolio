@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO CHAEWON</title>
+
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+  body { background: #0b0b0d; }
+
+  /* 이 페이지는 배경이 어두우니 커서도 밝은 톤으로 */
+  .cursor-dot { background: rgba(255, 255, 255, 0.6); }
+  .cursor-ring { background: rgba(255, 255, 255, 0.18); }
+  .cursor-ring.cursor-hover { background: rgba(255, 255, 255, 0.26); }
+
+  .site-footer {
+    background: #0b0b0d;
+    border-top-color: rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+  .footer-flow { color: #3157a4 !important; }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #0b0b0d;
+  }
+
+  #glitchCanvas {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 90vw;
+  }
+
+  /* 하단 인포바: 좌측 바이오 + 우측 스탯 3종 (다크 테마) */
+  .hero-infobar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 40px;
+    padding: 14px clamp(20px, 5vw, 56px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(11, 11, 13, 0.75);
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-bio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 480px;
+  }
+  .hero-bio-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-bio .scroll-arrow {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: rgba(255, 255, 255, 0.5);
+    animation: bounceDown 1.6s ease-in-out infinite;
+  }
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+  .hero-bio p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    text-align: left;
+  }
+
+  .hero-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .hero-stats-row .stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-stats-row .stat + .stat {
+    padding-left: 28px;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .hero-stats-row .stat-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    color: #ffffff;
+  }
+  .hero-stats-row .stat-number {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+  }
+  .hero-stats-row .stat-label {
+    font-size: 12px;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .hero-infobar { justify-content: center; text-align: center; }
+    .hero-bio { max-width: 100%; justify-content: center; }
+  }
+
+  /* 인스타그램 QR 카드 (다크 테마) */
+  .qr-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .qr-card:hover { border-color: #ff2b4d; transform: translateY(-2px); }
+
+  .qr-frame {
+    position: relative;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    padding: 4px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  #qrcode { width: 44px; height: 44px; }
+  .qr-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #2bffc9;
+  }
+  .qr-corner.tl { top: -6px; left: -6px; border-right: none; border-bottom: none; border-radius: 5px 0 0 0; }
+  .qr-corner.tr { top: -6px; right: -6px; border-left: none; border-bottom: none; border-radius: 0 5px 0 0; }
+  .qr-corner.bl { bottom: -6px; left: -6px; border-right: none; border-top: none; border-radius: 0 0 0 5px; }
+  .qr-corner.br { bottom: -6px; right: -6px; border-left: none; border-top: none; border-radius: 0 0 5px 0; }
+
+  .qr-info { display: flex; align-items: center; gap: 10px; }
+  .qr-info svg { width: 20px; height: 20px; color: #ffffff; flex-shrink: 0; }
+  .qr-label { color: #ffffff; font-weight: 700; font-size: 13px; }
+  .qr-handle { color: rgba(255, 255, 255, 0.55); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <a class="logo" href="index.html">SEO CHAEWON</a>
+  <nav class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="project.html">Project</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero-pin">
+  <canvas id="glitchCanvas"></canvas>
+
+  <div class="hero-infobar">
+    <div class="hero-bio">
+      <div class="hero-bio-top">
+        <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="4" x2="12" y2="19" />
+          <polyline points="6 13 12 19 18 13" />
+        </svg>
+        <p>10년간의 경영지원 경력을 겸비한 UI·UX 디자이너 &amp; 웹 퍼블리셔</p>
+      </div>
+
+      <a class="qr-card" href="https://www.instagram.com/jju_nen" target="_blank" rel="noopener">
+        <div class="qr-frame">
+          <div class="qr-corner tl"></div>
+          <div class="qr-corner tr"></div>
+          <div class="qr-corner bl"></div>
+          <div class="qr-corner br"></div>
+          <div id="qrcode"></div>
+        </div>
+        <div class="qr-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+          </svg>
+          <div>
+            <div class="qr-label">Instagram</div>
+            <div class="qr-handle">@jju_nen</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="hero-stats-row">
+      <div class="stat">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Years of<br />Experience</span>
+      </div>
+
+      <div class="stat">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <circle cx="12" cy="12" r="9" />
+          <ellipse cx="12" cy="12" rx="4" ry="9" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+        </svg>
+        <span class="stat-label">Web &amp;<br />UI/UX</span>
+      </div>
+
+      <div class="stat">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M12 3 L13.2 10.2 L20 12 L13.2 13.8 L12 21 L10.8 13.8 L4 12 L10.8 10.2 Z" />
+        </svg>
+        <span class="stat-label">AI-Assisted<br />Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  © 2026 SEOCHAEWON. All rights reserved.
+  <div class="footer-flow">Planning → Design → Development → Deploy</div>
+</footer>
+
+<script src="assets/js/cursor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+new QRCode(document.getElementById('qrcode'), {
+  text: 'https://www.instagram.com/jju_nen',
+  width: 76,
+  height: 76,
+  colorDark: '#1b1f2a',
+  colorLight: '#ffffff',
+  correctLevel: QRCode.CorrectLevel.M,
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ---- 글리치 폴 타이틀 (Canvas 2D) ----
+(function () {
+  const canvas = document.getElementById('glitchCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const CSS_W = 900, CSS_H = 300;
+  canvas.width = CSS_W * DPR;
+  canvas.height = CSS_H * DPR;
+  canvas.style.width = CSS_W + 'px';
+  canvas.style.height = CSS_H + 'px';
+  ctx.scale(DPR, DPR);
+
+  const text = 'SEO CHAEWON';
+  const FONT = "700 96px 'Pretendard', -apple-system, sans-serif";
+
+  function makeTextLayer(color) {
+    const c = document.createElement('canvas');
+    c.width = CSS_W;
+    c.height = CSS_H;
+    const cx = c.getContext('2d');
+    cx.fillStyle = color;
+    cx.font = FONT;
+    cx.textAlign = 'center';
+    cx.textBaseline = 'middle';
+    cx.fillText(text, CSS_W / 2, CSS_H / 2);
+    return c;
+  }
+
+  const off = makeTextLayer('#ffffff');
+  const offR = makeTextLayer('#ff2b4d');
+  const offC = makeTextLayer('#2bffc9');
+
+  const rowHeight = 4;
+  const rowCount = Math.ceil(CSS_H / rowHeight);
+
+  function draw(time) {
+    ctx.clearRect(0, 0, CSS_W, CSS_H);
+    ctx.fillStyle = '#0b0b0d';
+    ctx.fillRect(0, 0, CSS_W, CSS_H);
+
+    const t = time * 0.001;
+
+    for (let i = 0; i < rowCount; i++) {
+      const y = i * rowHeight;
+      const phase = t * 1.4 - i * 0.12;
+      const wave = Math.sin(phase) * Math.sin(phase * 0.37);
+      const glitchGate = Math.pow(Math.max(0, Math.sin(phase * 0.6)), 14);
+      const slip = wave * 26 * glitchGate;
+      const blockGlitch = (Math.random() < 0.02) ? (Math.random() - 0.5) * 120 : 0;
+      const offsetX = slip + blockGlitch;
+      const chroma = 3 + glitchGate * 9;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, y, CSS_W, rowHeight + 1);
+      ctx.clip();
+
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = 0.85;
+      ctx.drawImage(offR, offsetX - chroma, 0);
+      ctx.drawImage(offC, offsetX + chroma, 0);
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+      ctx.drawImage(off, offsetX, 0);
+
+      ctx.restore();
+    }
+
+    ctx.globalAlpha = 0.06;
+    ctx.fillStyle = '#ffffff';
+    for (let y = 0; y < CSS_H; y += 3) {
+      ctx.fillRect(0, y, CSS_W, 1);
+    }
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+gsap.set('.hero-infobar', { opacity: 0, y: 20 });
+gsap.to('.hero-infobar', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.3 });
+</script>
+
+</body>
+</html>

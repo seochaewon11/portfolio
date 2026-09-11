@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — SEO CHAEWON</title>
+
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+  .contact-list {
+    max-width: 560px;
+    margin: 0 auto 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 10px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .contact-row:hover {
+    border-color: #3157a4;
+    transform: translateY(-2px);
+  }
+
+  .contact-row .row-icon {
+    flex-shrink: 0;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .contact-row .row-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--navy);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .contact-row:hover .row-icon {
+    background: #3157a4;
+  }
+  .contact-row:hover .row-icon svg {
+    color: #ffffff;
+  }
+
+  .contact-row .row-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .contact-row .row-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .contact-row .row-value {
+    color: var(--gray);
+    font-size: 13px;
+  }
+
+  .contact-row .row-arrow {
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 14px;
+    width: 22px;
+    height: 22px;
+    color: var(--gray);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .contact-row:hover .row-arrow {
+    color: #3157a4;
+    transform: translateX(4px);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <a class="logo" href="index.html">SEO CHAEWON</a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="project.html">Project</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <span class="eyebrow">03 / Contact</span>
+  <h1>LET'S TALK TOGETHER</h1>
+  <p>함께 소통하고 싶다면, 아래 채널로 편하게 연락해주세요</p>
+</div>
+
+<div class="container">
+  <div class="contact-list">
+    <a class="contact-row" href="mailto:mycookis@naver.com">
+      <span class="row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg></span>
+      <span class="row-text"><span class="row-title">Email</span><span class="row-value">mycookis@naver.com</span></span>
+      <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+    </a>
+    <a class="contact-row" href="https://github.com/seochaewon11/ticket" target="_blank" rel="noopener">
+      <span class="row-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.93.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.03a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" /></svg></span>
+      <span class="row-text"><span class="row-title">GitHub</span><span class="row-value">github.com/seochaewon11/ticket</span></span>
+      <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+    </a>
+    <a class="contact-row" href="https://app.notion.com/p/fc1c080e90c0827f9b72811fadbaea19" target="_blank" rel="noopener">
+      <span class="row-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="#000000" /><path d="M7 7.2 L7 16.8 L8.6 16.8 L8.6 9.9 L15.1 16.8 L17 16.8 L17 7.2 L15.4 7.2 L15.4 14.1 L8.9 7.2 Z" fill="#ffffff" /></svg></span>
+      <span class="row-text"><span class="row-title">Notion</span><span class="row-value">바로가기</span></span>
+      <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+    </a>
+    <a class="contact-row" href="https://notefolio.net/chaenote" target="_blank" rel="noopener">
+      <span class="row-icon"><svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H10.5 L9 22 L20 9 H13.2 Z" fill="#12c6d6" /></svg></span>
+      <span class="row-text"><span class="row-title">Notefolio</span><span class="row-value">notefolio.net/chaenote</span></span>
+      <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+    </a>
+    <a class="contact-row" href="https://www.instagram.com/jju_nen" target="_blank" rel="noopener">
+      <span class="row-icon">
+        <svg viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FEDA75" />
+              <stop offset="30%" stop-color="#FA7E1E" />
+              <stop offset="60%" stop-color="#D62976" />
+              <stop offset="85%" stop-color="#962FBF" />
+              <stop offset="100%" stop-color="#4F5BD5" />
+            </linearGradient>
+          </defs>
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="url(#igGradient)" stroke-width="1.8" />
+          <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#igGradient)" stroke-width="1.8" />
+          <circle cx="17.3" cy="6.7" r="1.15" fill="url(#igGradient)" />
+        </svg>
+      </span>
+      <span class="row-text"><span class="row-title">Instagram</span><span class="row-value">@jju_nen</span></span>
+      <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  © 2026 SEOCHAEWON. All rights reserved.
+  <div class="footer-flow">Planning → Design → Development → Deploy</div>
+</footer>
+
+<script src="assets/js/cursor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
+<script>
+gsap.set('.page-header .eyebrow, .page-header h1, .page-header p', { opacity: 0, y: 24 });
+gsap.to('.page-header .eyebrow', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.1 });
+gsap.to('.page-header h1', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.25 });
+gsap.to('.page-header p', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.5 });
+
+gsap.from('.contact-row', {
+  opacity: 0,
+  y: 20,
+  duration: 0.6,
+  ease: 'power2.out',
+  stagger: 0.1,
+  delay: 0.6,
+});
+</script>
+
+</body>
+</html>

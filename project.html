@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — SEO CHAEWON</title>
+
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+  .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    padding-bottom: 60px;
+    perspective: 3000px;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transform-origin: center center;
+    transition: none;
+    cursor: pointer;
+  }
+
+  .project-media {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 260px;
+    overflow: hidden;
+  }
+  .project-media img {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    object-fit: cover;
+  }
+  /* main.png는 세로로 긴 스크린샷이라 기본(가운데) 크롭이 알람 카드 영역을 그대로 보여줘서,
+     상단 히어로 배너 쪽이 보이도록 노출 위치를 위로 당김 */
+  .project-media img.crop-top,
+  .modal-cover.crop-top {
+    object-position: center 24%;
+  }
+  .project-media.single {
+    grid-template-columns: 1fr;
+  }
+
+  .project-caption {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .project-caption h3 {
+    font-size: 15px;
+    font-weight: 800;
+  }
+  .project-caption .status {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+
+  /* project-info는 화면에 노출되지 않고, 클릭 시 모달에 채워 넣을 상세 데이터로만 쓰인다 */
+  .project-info { display: none; }
+  .project-info .status {
+    display: inline-block;
+    width: fit-content;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 14px;
+  }
+  .project-info h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .project-info p {
+    color: var(--gray);
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .project-tags span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--cream);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 8px;
+  }
+  .project-links a {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .project-links .primary {
+    background: var(--navy);
+    color: #fff;
+  }
+  .project-links .secondary {
+    border: 1px solid var(--border);
+    color: var(--navy);
+  }
+  .project-links .secondary:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+
+
+  /* ---- VIEW 커스텀 커서 ---- */
+  .project-media {
+    cursor: none;
+    position: relative;
+  }
+  .view-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 500;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .view-cursor.active {
+    opacity: 0.82;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* ---- 상세보기 모달 ---- */
+  .project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(11, 11, 13, 0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .project-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .project-modal-card {
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    max-height: 86vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 0 0 36px;
+    transform: translateY(16px) scale(0.97);
+    transition: transform 0.25s ease;
+  }
+  .project-modal.open .project-modal-card {
+    transform: translateY(0) scale(1);
+  }
+  .modal-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+    margin-bottom: 24px;
+    cursor: pointer;
+    transition: transform 0.35s ease;
+  }
+  .modal-cover:hover {
+    transform: scale(1.03);
+  }
+  #modalBody {
+    padding: 0 36px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--navy);
+  }
+  .modal-close svg { width: 16px; height: 16px; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <a class="logo" href="index.html">SEO CHAEWON</a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="project.html" class="active">Project</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <span class="eyebrow">02 / Project</span>
+  <h1 style="text-transform: uppercase;">Selected Works</h1>
+  <p>기획부터 디자인, 개발, 배포까지 직접 만든 프로젝트들입니다</p>
+</div>
+
+<div class="container">
+  <div class="project-list">
+
+    <article class="project-card">
+      <div class="project-media" style="grid-template-columns: repeat(2, 1fr);">
+        <img class="crop-top" src="assets/demo/main.png" alt="NOLI 취향 맞춤 홈 화면" />
+        <img src="assets/demo/report.png" alt="NOLI 나의 관람 리포트" />
+      </div>
+      <div class="project-caption">
+        <h3>🎫 NOLI</h3>
+        <span class="status">IN PROGRESS</span>
+      </div>
+      <div class="project-info">
+        <span class="status">IN PROGRESS</span>
+        <h2>🎫 NOLI</h2>
+        <p>취향 기반 공연 큐레이션 앱 — 맞춤 추천, 티켓 오픈 알림, 관람 리포트로 일상에 문화를 더합니다.</p>
+        <div class="project-tags">
+          <span>React</span><span>TypeScript</span><span>Vite</span><span>Vercel</span>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://ticket-puce-seven.vercel.app/" target="_blank" rel="noopener">Live</a>
+          <a class="secondary" href="https://github.com/seochaewon11/ticket" target="_blank" rel="noopener">Repo</a>
+          <a class="secondary" href="https://www.figma.com/design/ou0DQ3A12frTOFM87hJtic/noli_app?node-id=0-1&t=JaLOcqm54swMnlEJ-1" target="_blank" rel="noopener">Design</a>
+          <a class="secondary" href="https://notefolio.net/chaenote/466161" target="_blank" rel="noopener">Notefolio</a>
+          <a class="secondary" href="https://app.notion.com/p/Project1_NOLI-5203cdc6ec6443f9adb0d1cd6f90ae46?source=copy_link" target="_blank" rel="noopener">Notion</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-media">
+        <img src="assets/demo-health/main.png" alt="한끼통살 홈 화면" />
+        <img src="assets/demo-health/welcome-popup.png" alt="한끼통살 웰컴 쿠폰 팝업" />
+        <img src="assets/demo-health/detail.png" alt="한끼통살 상품 상세" />
+      </div>
+      <div class="project-caption">
+        <h3>🍗 한끼통살</h3>
+        <span class="status">IN PROGRESS</span>
+      </div>
+      <div class="project-info">
+        <span class="status">IN PROGRESS</span>
+        <h2>🍗 한끼통살</h2>
+        <p>닭가슴살 다이어트 식단 쇼핑 앱 — 취향에 맞는 식단을 간편하게 담고, 소셜 로그인과 간편결제로 건강한 한 끼를 더 쉽게 챙길 수 있도록 돕습니다.</p>
+        <div class="project-tags">
+          <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Firebase Auth</span><span>TossPayments</span>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://health-weld-three.vercel.app/" target="_blank" rel="noopener">Live</a>
+          <a class="secondary" href="https://github.com/seochaewon11/health" target="_blank" rel="noopener">Repo</a>
+          <a class="secondary" href="https://www.figma.com/design/wFvB1V8Q4wXrv8iYaNKcLX/%ED%95%9C%EB%81%BC%ED%86%B5%EC%82%B4_%EB%8B%AD%EA%B0%80%EC%8A%B4%EC%82%B4?node-id=0-1&t=57MABfwjlVtehiF1-1" target="_blank" rel="noopener">Design</a>
+          <a class="secondary" href="https://notefolio.net/chaenote/466161" target="_blank" rel="noopener">Notefolio</a>
+          <a class="secondary" href="https://app.notion.com/p/Project-2-3d4c080e90c08102bc73d761a6437fec" target="_blank" rel="noopener">Notion</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-media single">
+        <img src="assets/demo-library/poster.jpg" alt="Time Archive 인트로 포스터" />
+      </div>
+      <div class="project-caption">
+        <h3>🏛️ 국립중앙도서관</h3>
+        <span class="status">IN PROGRESS</span>
+      </div>
+      <div class="project-info">
+        <span class="status">IN PROGRESS</span>
+        <h2>🏛️ 국립중앙도서관</h2>
+        <p>국립중앙도서관 리뉴얼 웹사이트 — 스크롤 한 번으로 도서관의 역사를 거슬러 올라가는 몰입형 아카이브 경험을 선사합니다.</p>
+        <div class="project-tags">
+          <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>GSAP</span><span>GitHub Pages</span>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://seochaewon11.github.io/library_2/" target="_blank" rel="noopener">Live</a>
+          <a class="secondary" href="https://github.com/seochaewon11/library_2" target="_blank" rel="noopener">Repo</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<div class="view-cursor" id="viewCursor">VIEW</div>
+
+<div class="project-modal" id="projectModal">
+  <div class="project-modal-card" id="projectModalCard">
+    <button class="modal-close" id="modalClose" aria-label="닫기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>
+    </button>
+    <img class="modal-cover" id="modalCover" src="" alt="" />
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  © 2026 SEOCHAEWON. All rights reserved.
+  <div class="footer-flow">Planning → Design → Development → Deploy</div>
+</footer>
+
+<script src="assets/js/cursor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.set('.page-header .eyebrow, .page-header h1, .page-header p', { opacity: 0, y: 24 });
+gsap.to('.page-header .eyebrow', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.1 });
+gsap.to('.page-header h1', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.25 });
+gsap.to('.page-header p', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.5 });
+
+window.addEventListener('load', function () {
+  ScrollTrigger.refresh();
+  // 책장이 왼쪽에서 오른쪽으로 펼쳐지듯, 스크롤로 내려와야 나타나는 연출
+  gsap.utils.toArray('.project-card').forEach((card) => {
+    gsap.set(card, { opacity: 0, rotationY: -35 });
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 92%',
+      end: 'top 60%',
+      scrub: true,
+      onUpdate: (self) => {
+        const p = self.progress;
+        gsap.set(card, { opacity: p, rotationY: -35 * (1 - p) });
+      },
+      onLeave: () => {
+        // 스크롤 애니메이션 끝나면 inline transform 완전히 제거 → CSS hover 정상 작동
+        gsap.set(card, { clearProps: 'all' });
+      },
+      onEnterBack: () => {
+        // 역스크롤 시 다시 inline 지워서 hover 유지
+        gsap.set(card, { clearProps: 'all' });
+      },
+    });
+
+    // GSAP으로 hover 팝업 처리 (CSS :hover 대신 — transform 충돌 방지)
+    card.addEventListener('mouseenter', () => {
+      gsap.to(card, { y: -10, scale: 1.018, boxShadow: '0 24px 50px rgba(0,0,0,0.14)', duration: 0.28, ease: 'power2.out' });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { y: 0, scale: 1, boxShadow: '0 0px 0px rgba(0,0,0,0)', duration: 0.28, ease: 'power2.out' });
+    });
+  });
+});
+
+// ---- VIEW 커스텀 커서 ----
+const viewCursor = document.getElementById('viewCursor');
+document.addEventListener('mousemove', (e) => {
+  viewCursor.style.left = e.clientX + 'px';
+  viewCursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('.project-media').forEach((media) => {
+  media.addEventListener('mouseenter', () => {
+    viewCursor.classList.add('active');
+    if (window.__globalCursor) {
+      window.__globalCursor.dot.classList.add('cursor-hide');
+      window.__globalCursor.ring.classList.add('cursor-hide');
+    }
+  });
+  media.addEventListener('mouseleave', () => {
+    viewCursor.classList.remove('active');
+    if (window.__globalCursor) {
+      window.__globalCursor.dot.classList.remove('cursor-hide');
+      window.__globalCursor.ring.classList.remove('cursor-hide');
+    }
+  });
+});
+
+// ---- 클릭 시 상세 모달 ----
+const modal = document.getElementById('projectModal');
+const modalBody = document.getElementById('modalBody');
+const modalCover = document.getElementById('modalCover');
+const modalCard = document.getElementById('projectModalCard');
+
+document.querySelectorAll('.project-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const info = card.querySelector('.project-info');
+    const firstImg = card.querySelector('.project-media img');
+    modalCover.src = firstImg ? firstImg.src : '';
+    modalCover.alt = firstImg ? firstImg.alt : '';
+    modalCover.classList.toggle('crop-top', !!firstImg && firstImg.classList.contains('crop-top'));
+    modalBody.innerHTML = info.innerHTML;
+    modal.classList.add('open');
+    viewCursor.classList.remove('active');
+  });
+});
+
+// 커버 이미지 클릭 시 살짝 확대되는 프리뷰 (한 번만 등록)
+modalCover.style.cursor = 'zoom-in';
+modalCover.addEventListener('click', () => {
+  gsap.fromTo(modalCover, { scale: 1 }, { scale: 1.5, duration: 0.4, ease: 'power2.out', yoyo: true, repeat: 1 });
+});
+
+function closeModal() {
+  modal.classList.remove('open');
+  gsap.set(modalCard, { scale: 1, opacity: 1 });
+}
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+
+</body>
+</html>
