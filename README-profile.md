@@ -43,12 +43,11 @@ Figma를 활용한 화면 설계와 프로토타이핑부터 HTML/CSS/JavaScript
 - 타임딜, 웰컴 쿠폰 등 프로모션 인터랙션 설계
 - HTML/CSS/JavaScript 기반 웹 구현 및 Vercel 배포
 
-**🏛️ 국립중앙도서관 웹사이트 리뉴얼 프로젝트**
-- 'TIME ARCHIVE' 컨셉의 웹사이트 리뉴얼 기획
-- 도서관의 역사와 시대적 변화를 시각적으로 보여주는 인터랙티브 UX 설계
-- GSAP / ScrollTrigger 기반 스크롤 인터랙션 연구
-- 영상 Scrubbing을 활용한 Scroll-driven Web Experience 구현
-- 고대 → 근대 → 현대의 시간 흐름을 중심으로 한 HERO UI 설계
+**🌳 한국환경공단 웹사이트 리뉴얼 프로젝트**
+- 매립지 → 생태공원 → 자원순환으로 이어지는 환경 스토리텔링 랜딩페이지 기획
+- GSAP / ScrollTrigger 기반 스크롤 인터랙션 및 영상 Scrubbing 구현
+- React / Vite 기반 컴포넌트 구조 설계 및 개발
+- AI를 활용한 기획·디자인·개발 전 과정 보조
 
 **개인 웹 프로젝트 및 포트폴리오 제작**
 - 서비스 아이디어 발굴부터 기획, 디자인, 개발까지 직접 진행
@@ -71,9 +70,7 @@ Figma를 활용한 화면 설계와 프로토타이핑부터 HTML/CSS/JavaScript
 |---|---|---|
 | 🎫 **NOLI** | 취향 기반 공연 큐레이션 앱 — 맞춤 추천, 티켓 오픈 알림, 관람 리포트 | [Live](https://ticket-puce-seven.vercel.app/) · [Repo](https://github.com/seochaewon11/ticket) · [Notion](https://app.notion.com/p/Project1_NOLI-5203cdc6ec6443f9adb0d1cd6f90ae46?source=copy_link) |
 | 🍗 **한끼통살** | 닭가슴살 다이어트 식단 이커머스 — 반응형 레이아웃, 소셜 로그인, 토스페이먼츠 결제 | [Live](https://health-weld-three.vercel.app/) · [Repo](https://github.com/seochaewon11/health) · [Notion](https://app.notion.com/p/Project-2-3d4c080e90c08102bc73d761a6437fec) |
-| 🏛️ **Time Archive** | 국립중앙도서관 리뉴얼 — GSAP/ScrollTrigger 기반 스크롤 아카이브 인터랙션 | [Live](https://seochaewon11.github.io/library_2/) · [Repo](https://github.com/seochaewon11/library_2) · [Notion](https://app.notion.com/p/Project-3-c3ac080e90c0827a83c101c94d71084c) |
-
-> 각 프로젝트의 기획 과정과 AI 활용 프롬프트는 `README-project001.md`(NOLI) · `README-project002.md`(한끼통살) · `README-project003.md`(Time Archive)에서 자세히 볼 수 있습니다.
+| 🌳 **한국환경공단** | 매립지→생태공원→자원순환 환경 스토리텔링 랜딩페이지 — React/Vite/GSAP | [Repo](https://github.com/seochaewon11/economy) |
 
 ### 🔗 바로가기
 
