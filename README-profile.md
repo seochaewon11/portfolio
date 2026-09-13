@@ -70,7 +70,7 @@ Figma를 활용한 화면 설계와 프로토타이핑부터 HTML/CSS/JavaScript
 |---|---|---|
 | 🎫 **NOLI** | 취향 기반 공연 큐레이션 앱 — 맞춤 추천, 티켓 오픈 알림, 관람 리포트 | [Live](https://ticket-puce-seven.vercel.app/) · [Repo](https://github.com/seochaewon11/ticket) · [Notion](https://app.notion.com/p/Project1_NOLI-5203cdc6ec6443f9adb0d1cd6f90ae46?source=copy_link) |
 | 🍗 **한끼통살** | 닭가슴살 다이어트 식단 이커머스 — 반응형 레이아웃, 소셜 로그인, 토스페이먼츠 결제 | [Live](https://health-weld-three.vercel.app/) · [Repo](https://github.com/seochaewon11/health) · [Notion](https://app.notion.com/p/Project-2-3d4c080e90c08102bc73d761a6437fec) |
-| 🌳 **한국환경공단** | 매립지→생태공원→자원순환 환경 스토리텔링 랜딩페이지 — React/Vite/GSAP | [Live](https://temporary-snappy-basalt-1n4ap0s.vercel.app) · [Repo](https://github.com/seochaewon11/economy) · [Notion](https://app.notion.com/p/Project-3-c3ac080e90c0827a83c101c94d71084c) |
+| 🌳 **한국환경공단** | 매립지→생태공원→자원순환 환경 스토리텔링 랜딩페이지 — React/Vite/GSAP | [Live](https://economy-eight-flame.vercel.app) · [Repo](https://github.com/seochaewon11/economy) · [Notion](https://app.notion.com/p/Project-3-c3ac080e90c0827a83c101c94d71084c) |
 
 ### 🔗 바로가기
 
