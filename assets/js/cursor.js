@@ -27,7 +27,7 @@
   }
   raf();
 
-  const hoverSelector = 'a, button, .contact-row, .qr-card, .project-card, .skill-chip, .resume-social a';
+  const hoverSelector = 'a, button, .contact-row, .qr-card, .skill-chip, .resume-social a';
   // relatedTarget으로 "그 요소 안에서" 자식들 사이를 움직이는 것과
   // "그 요소를 실제로 벗어나는 것"을 구분해서, 호버 중 깜빡이며 사라지는 걸 방지
   document.addEventListener('mouseover', (e) => {
