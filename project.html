@@ -99,45 +99,6 @@
     color: var(--navy);
   }
 
-  .project-card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    align-self: flex-start;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--navy);
-    background: #fff;
-    border: 1.5px solid var(--navy);
-    border-radius: 999px;
-    padding: 5px 6px 5px 20px;
-    transition: background 0.25s ease, color 0.25s ease;
-  }
-  .project-card-cta .arrow {
-    flex-shrink: 0;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: #fff;
-    font-size: 14px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-  }
-  .project-card-cta:hover {
-    background: var(--navy);
-    color: #fff;
-  }
-  .project-card-cta:hover .arrow {
-    background: #fff;
-    color: var(--navy);
-    transform: translateX(3px);
-  }
-
   .project-card-links {
     display: flex;
     flex-wrap: wrap;
@@ -145,9 +106,10 @@
     gap: 10px;
   }
 
-  .project-card-tag-link {
+  .project-card-link {
     display: inline-flex;
     align-items: center;
+    gap: 10px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.02em;
@@ -155,14 +117,33 @@
     background: #fff;
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 9px 16px;
+    padding: 6px 6px 6px 16px;
     text-decoration: none;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
-  .project-card-tag-link:hover {
+  .project-card-link .arrow {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--cream);
+    color: var(--navy);
+    font-size: 12px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  }
+  .project-card-link:hover {
     background: var(--navy);
     border-color: var(--navy);
     color: #fff;
+  }
+  .project-card-link:hover .arrow {
+    background: #fff;
+    color: var(--navy);
+    transform: translateX(3px);
   }
 
   @media (max-width: 640px) {
@@ -383,11 +364,11 @@
           <div><dt>STATUS</dt><dd>In Progress</dd></div>
         </dl>
         <div class="project-card-links">
-          <a class="project-card-cta" href="https://ticket-green25.vercel.app" target="_blank" rel="noopener">GO <span class="arrow">→</span></a>
-          <a class="project-card-tag-link" href="https://github.com/seochaewon11/ticket/blob/main/README.md" target="_blank" rel="noopener">README</a>
-          <a class="project-card-tag-link" href="https://notefolio.net/chaenote/466161" target="_blank" rel="noopener">NOTEPOLIO</a>
-          <a class="project-card-tag-link" href="https://app.notion.com/p/Project1_NOLI-5203cdc6ec6443f9adb0d1cd6f90ae46" target="_blank" rel="noopener">NOTION</a>
-          <a class="project-card-tag-link" href="https://www.figma.com/design/ou0DQ3A12frTOFM87hJtic/noli_app?node-id=21-1468&t=xyKN0PcB68cYs13P-1" target="_blank" rel="noopener">DESIGN</a>
+          <a class="project-card-link" href="https://ticket-green25.vercel.app" target="_blank" rel="noopener">GO <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://github.com/seochaewon11/ticket/blob/main/README.md" target="_blank" rel="noopener">README <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://notefolio.net/chaenote/466161" target="_blank" rel="noopener">NOTEPOLIO <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://app.notion.com/p/Project1_NOLI-5203cdc6ec6443f9adb0d1cd6f90ae46" target="_blank" rel="noopener">NOTION <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://www.figma.com/design/ou0DQ3A12frTOFM87hJtic/noli_app?node-id=21-1468&t=xyKN0PcB68cYs13P-1" target="_blank" rel="noopener">DESIGN <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="project-info">
@@ -422,11 +403,11 @@
           <div><dt>STATUS</dt><dd>In Progress</dd></div>
         </dl>
         <div class="project-card-links">
-          <a class="project-card-cta" href="https://health-green25.vercel.app" target="_blank" rel="noopener">GO <span class="arrow">→</span></a>
-          <a class="project-card-tag-link" href="https://github.com/seochaewon11/health/blob/main/README.md" target="_blank" rel="noopener">README</a>
-          <a class="project-card-tag-link" href="https://notefolio.net/chaenote/466161" target="_blank" rel="noopener">NOTEPOLIO</a>
-          <a class="project-card-tag-link" href="https://app.notion.com/p/Project-2-3d4c080e90c08102bc73d761a6437fec" target="_blank" rel="noopener">NOTION</a>
-          <a class="project-card-tag-link" href="https://www.figma.com/design/wFvB1V8Q4wXrv8iYaNKcLX/%ED%95%9C%EB%81%BC%ED%86%B5%EC%82%B4_%EB%8B%AD%EA%B0%80%EC%8A%B4%EC%82%B4?node-id=0-1&t=bxZ5eFj9ExSMHGHb-1" target="_blank" rel="noopener">DESIGN</a>
+          <a class="project-card-link" href="https://health-green25.vercel.app" target="_blank" rel="noopener">GO <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://github.com/seochaewon11/health/blob/main/README.md" target="_blank" rel="noopener">README <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://notefolio.net/chaenote/466161" target="_blank" rel="noopener">NOTEPOLIO <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://app.notion.com/p/Project-2-3d4c080e90c08102bc73d761a6437fec" target="_blank" rel="noopener">NOTION <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://www.figma.com/design/wFvB1V8Q4wXrv8iYaNKcLX/%ED%95%9C%EB%81%BC%ED%86%B5%EC%82%B4_%EB%8B%AD%EA%B0%80%EC%8A%B4%EC%82%B4?node-id=0-1&t=bxZ5eFj9ExSMHGHb-1" target="_blank" rel="noopener">DESIGN <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="project-info">
@@ -461,9 +442,9 @@
           <div><dt>STATUS</dt><dd>In Progress</dd></div>
         </dl>
         <div class="project-card-links">
-          <a class="project-card-cta" href="https://economy-green25.vercel.app" target="_blank" rel="noopener">GO <span class="arrow">→</span></a>
-          <a class="project-card-tag-link" href="https://github.com/seochaewon11/economy/blob/main/README.md" target="_blank" rel="noopener">README</a>
-          <a class="project-card-tag-link" href="https://app.notion.com/p/Project-3-c3ac080e90c0827a83c101c94d71084c" target="_blank" rel="noopener">NOTION</a>
+          <a class="project-card-link" href="https://economy-green25.vercel.app" target="_blank" rel="noopener">GO <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://github.com/seochaewon11/economy/blob/main/README.md" target="_blank" rel="noopener">README <span class="arrow">→</span></a>
+          <a class="project-card-link" href="https://app.notion.com/p/Project-3-c3ac080e90c0827a83c101c94d71084c" target="_blank" rel="noopener">NOTION <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="project-info">
@@ -575,7 +556,7 @@ const modalBody = document.getElementById('modalBody');
 const modalCover = document.getElementById('modalCover');
 const modalCard = document.getElementById('projectModalCard');
 
-document.querySelectorAll('.project-card-cta, .project-card-tag-link').forEach((cta) => {
+document.querySelectorAll('.project-card-link').forEach((cta) => {
   cta.addEventListener('click', (e) => e.stopPropagation());
 });
 
