@@ -228,37 +228,6 @@
     color: #fff;
   }
 
-
-  /* ---- VIEW 커스텀 커서 ---- */
-  .project-card {
-    cursor: none;
-  }
-  .view-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    z-index: 500;
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.6);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  .view-cursor.active {
-    opacity: 0.82;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
   /* ---- 상세보기 모달 ---- */
   .project-modal {
     position: fixed;
@@ -465,8 +434,6 @@
   </div>
 </div>
 
-<div class="view-cursor" id="viewCursor">VIEW</div>
-
 <div class="project-modal" id="projectModal">
   <div class="project-modal-card" id="projectModalCard">
     <button class="modal-close" id="modalClose" aria-label="닫기">
@@ -527,29 +494,6 @@ window.addEventListener('load', function () {
   });
 });
 
-// ---- VIEW 커스텀 커서 ----
-const viewCursor = document.getElementById('viewCursor');
-document.addEventListener('mousemove', (e) => {
-  viewCursor.style.left = e.clientX + 'px';
-  viewCursor.style.top = e.clientY + 'px';
-});
-document.querySelectorAll('.project-card').forEach((card) => {
-  card.addEventListener('mouseenter', () => {
-    viewCursor.classList.add('active');
-    if (window.__globalCursor) {
-      window.__globalCursor.dot.classList.add('cursor-hide');
-      window.__globalCursor.ring.classList.add('cursor-hide');
-    }
-  });
-  card.addEventListener('mouseleave', () => {
-    viewCursor.classList.remove('active');
-    if (window.__globalCursor) {
-      window.__globalCursor.dot.classList.remove('cursor-hide');
-      window.__globalCursor.ring.classList.remove('cursor-hide');
-    }
-  });
-});
-
 // ---- 클릭 시 상세 모달 ----
 const modal = document.getElementById('projectModal');
 const modalBody = document.getElementById('modalBody');
@@ -568,7 +512,6 @@ document.querySelectorAll('.project-card').forEach((card) => {
     modalCover.alt = firstImg ? firstImg.alt : '';
     modalBody.innerHTML = info.innerHTML;
     modal.classList.add('open');
-    viewCursor.classList.remove('active');
   });
 });
 
